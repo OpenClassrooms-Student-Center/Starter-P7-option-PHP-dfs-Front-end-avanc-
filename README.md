@@ -20,7 +20,7 @@ Visual Studio Code est recommandé, avec les extensions PHP Debug (Xdebug), PHP 
 ## Installation
 
 ```bash
-git clone https://github.com/kasa-demo/kasa-app.git
+git clone https://github.com/OpenClassrooms-Student-Center/Starter-P7-option-PHP-dfs-Front-end-avanc-.git kasa-app
 cd kasa-app
 ```
 
