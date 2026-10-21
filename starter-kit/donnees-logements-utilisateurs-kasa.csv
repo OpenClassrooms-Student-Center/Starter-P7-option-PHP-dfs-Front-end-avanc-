@@ -1,4 +1,4 @@
-type_enregistrement,id,titre,type_logement,ville,prix_par_nuit,id_hote,role,prenom,nom,email,mot_de_passe_clair,date_creation
+type_enregistrement,id,titre,type_logement,ville,prix_par_nuit,id_hote,role,prenom,nom,email,mot_de_passe_clair,date_creation,id_voyageur,id_logement,date_arrivee,nombre_nuits,statut_sejour,prix_total
 utilisateur,u-001,,,,,,administrateur,Inès,Favreau,ines.favreau@kasa-demo.fr,Admin!Kasa2026,2026-01-05
 utilisateur,u-002,,,,,,hote,Marc,Lévesque,marc.levesque@exemple-kasa.fr,marcl-hote-01,2026-01-06
 utilisateur,u-003,,,,,,hote,Sofia,Brandao,sofia.brandao@exemple-kasa.fr,Sofia@Brandao77,2026-01-06
@@ -21,3 +21,5 @@ logement,l-009,T3 proche gare Saint-Jean,appartement,Bordeaux,95,u-002,,,,,,2026
 logement,l-010,Maison de ville avec terrasse,maison,Toulouse,150,u-003,,,,,,2026-01-18
 logement,l-011,Studio étudiant cosy,appartement,Lille,62,u-004,,,,,,2026-01-18
 logement,l-012,Gîte en pleine campagne,maison,Sarlat-la-Canéda,105,u-005,,,,,,2026-01-20
+sejour,sejour-001,,,,,,,,,,,,u-006,l-001,2026-11-12,4,confirmee,356
+sejour,sejour-002,,,,,,,,,,,,u-007,l-004,2026-12-03,3,confirmee,780

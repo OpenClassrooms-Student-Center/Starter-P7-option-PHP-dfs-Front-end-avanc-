@@ -15,6 +15,7 @@ export default function Header() {
       <nav aria-label="Navigation principale">
         {session ? (
           <>
+            <Link to="/mes-sejours">Mes séjours</Link>
             <span>Bonjour {session.prenom}</span>
             <button type="button" className="bouton bouton-secondaire" onClick={effacerSession}>
               Déconnexion

@@ -159,18 +159,24 @@ Côté API, les contrôleurs sont minces : ils appellent le service `ChargeurCsv
 
 ## Données
 
-L'API lit ses données depuis le fichier CSV désigné par `DATA_FILE` : 10 comptes (voyageurs, hôtes, administrateur) et 12 logements. Chaque ligne porte un `type_enregistrement` (`utilisateur` ou `logement`) et les colonnes propres à ce type. Les logements sont rattachés à leur hôte par la colonne `id_hote`.
+L'API lit ses données depuis le fichier CSV désigné par `DATA_FILE` : 10 comptes (voyageurs, hôtes, administrateur), 12 logements et 2 séjours de démonstration. Chaque ligne porte un `type_enregistrement` (`utilisateur`, `logement` ou `sejour`) et les colonnes propres à ce type. Les logements sont rattachés à leur hôte et les séjours à leur voyageur et logement par leurs identifiants.
 
 ## Points d'entrée de l'API
 
-Toutes les routes sont préfixées par `/api` et renvoient du JSON. Le CORS n'autorise que l'origine définie par `CORS_ALLOW_ORIGIN`.
+Les routes d'API préfixées par `/api` renvoient du JSON. Le CORS n'autorise que l'origine définie par `CORS_ALLOW_ORIGIN`.
 
 | Méthode et route | Description | Réponse |
 | --- | --- | --- |
 | `GET /api/sante` | État de l'API | `{ "statut": "ok" }` |
 | `GET /api/logements` | Liste des logements, chacun complété par le prénom et le nom de son hôte | tableau de logements |
 | `GET /api/logements/{id}` | Détail d'un logement | un logement |
+| `GET /api/sejours?voyageurId=…` | Séjours associés à un voyageur | tableau de séjours |
+| `GET /api/sejours/{id}` | Détail d'un séjour | un séjour |
+| `GET /api/administration` | Indicateurs, réservations et annonces du tableau de bord | données du tableau de bord |
+| `GET /api/logements/{id}/conciergerie` | Coordonnées du service de conciergerie associé au logement | informations du partenaire |
 | `POST /api/auth/login` | Connexion ; corps `{ "email": "…", "motDePasse": "…" }` | `200` avec `{ id, role, prenom, nom, email }`, ou `401` avec `{ "message": "Identifiants invalides" }` |
+
+L'aperçu d'avis est une page HTML utilisée depuis le détail du logement.
 
 Forme d'un logement :
 

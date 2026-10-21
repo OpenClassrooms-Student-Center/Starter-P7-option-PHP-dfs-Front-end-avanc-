@@ -13,6 +13,7 @@ services:
             - '../src/Kernel.php'
             - '../src/Donnees/Utilisateur.php'
             - '../src/Donnees/Logement.php'
+            - '../src/Donnees/Sejour.php'
             - '../src/Donnees/JeuDeDonnees.php'
 
     App\Donnees\ChargeurCsv:

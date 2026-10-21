@@ -135,6 +135,14 @@ h1 {
   font: inherit;
 }
 
+.champ textarea {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 6px;
+  font: inherit;
+  resize: vertical;
+}
+
 .champ input:focus {
   outline: 2px solid var(--couleur-principale);
   outline-offset: 1px;
@@ -166,4 +174,40 @@ h1 {
 .erreur {
   color: var(--couleur-erreur);
   margin: 0;
+}
+
+.section-logement {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--couleur-bordure);
+}
+
+.section-logement h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.cadre-externe {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  margin-top: 1rem;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon);
+  background: #fff;
+}
+
+.liste-sejours {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.liste-sejours .carte-logement h2 {
+  margin-bottom: 0.5rem;
+}
+
+.texte-secondaire {
+  color: var(--couleur-texte-secondaire);
 }

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Donnees;
 
 /**
- * Lit le fichier CSV de données et le transforme en comptes et en logements.
+ * Lit le fichier CSV de données et le transforme en comptes, logements et séjours.
  *
  * La première ligne du fichier est l'en-tête ; la colonne type_enregistrement
- * indique la nature de chaque ligne (utilisateur ou logement). Le fichier n'utilise
+ * indique la nature de chaque ligne (utilisateur, logement ou séjour). Le fichier n'utilise
  * ni guillemets ni virgules dans ses valeurs : un découpage simple suffit.
  */
 final class ChargeurCsv
@@ -31,17 +31,18 @@ final class ChargeurCsv
 
         $lignes = preg_split('/\r?\n/', $texte);
         if (false === $lignes) {
-            return new JeuDeDonnees([], []);
+            return new JeuDeDonnees([], [], []);
         }
 
         $lignes = array_values(array_filter($lignes, static fn (string $ligne): bool => '' !== trim($ligne)));
         if ([] === $lignes) {
-            return new JeuDeDonnees([], []);
+            return new JeuDeDonnees([], [], []);
         }
 
         $entetes = self::decouperLigne(array_shift($lignes));
         $utilisateurs = [];
         $logements = [];
+        $sejours = [];
 
         foreach ($lignes as $ligne) {
             $valeurs = self::decouperLigne($ligne);
@@ -55,10 +56,12 @@ final class ChargeurCsv
                 $utilisateurs[] = self::versUtilisateur($enregistrement);
             } elseif ('logement' === $type) {
                 $logements[] = self::versLogement($enregistrement);
+            } elseif ('sejour' === $type) {
+                $sejours[] = self::versSejour($enregistrement);
             }
         }
 
-        return new JeuDeDonnees($utilisateurs, $logements);
+        return new JeuDeDonnees($utilisateurs, $logements, $sejours);
     }
 
     /**
@@ -114,6 +117,23 @@ final class ChargeurCsv
             ville: $enregistrement['ville'] ?? '',
             prixParNuit: $enregistrement['prix_par_nuit'] ?? '',
             idHote: $enregistrement['id_hote'] ?? '',
+            dateCreation: $enregistrement['date_creation'] ?? '',
+        );
+    }
+
+    /**
+     * @param array<string, string> $enregistrement
+     */
+    private static function versSejour(array $enregistrement): Sejour
+    {
+        return new Sejour(
+            id: $enregistrement['id'] ?? '',
+            idVoyageur: $enregistrement['id_voyageur'] ?? '',
+            idLogement: $enregistrement['id_logement'] ?? '',
+            dateArrivee: $enregistrement['date_arrivee'] ?? '',
+            nombreNuits: (int) ($enregistrement['nombre_nuits'] ?? 0),
+            statut: $enregistrement['statut_sejour'] ?? '',
+            prixTotal: $enregistrement['prix_total'] ?? '',
             dateCreation: $enregistrement['date_creation'] ?? '',
         );
     }
